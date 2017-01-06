@@ -51,6 +51,6 @@ we can upload _only_ the `results` subdirectory by using the following `options`
 
 ```yaml
 options:
-  - "--exclude: '*'",
-  - "--include: 'results/*'"
+  - "--exclude '*'",
+  - "--include 'results/*'"
 ```
