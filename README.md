@@ -11,7 +11,7 @@ resource_types:
 - name: s3-bucket
   type: docker-image
   source:
-    repository: 18fgsa/s3-resource-simple
+    repository: troykinsella/s3-resource-simple
 
 resources:
 - name: s3
