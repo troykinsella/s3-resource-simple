@@ -15,7 +15,7 @@ export_aws_vars() {
     export AWS_SECRET_ACCESS_KEY=$secret_access_key
   fi
 
-  if [ -n "$AWS_DEFAULT_REGION" ]; then
+  if [ -n "$default_region" ]; then
     export AWS_DEFAULT_REGION=$default_region
   fi
 }
