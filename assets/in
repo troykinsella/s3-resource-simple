@@ -18,11 +18,16 @@ payload=`cat`
 bucket=$(get_bucket)
 prefix=$(echo "$payload" | jq -r '.params.prefix // ""')
 options=$(echo "$payload" | jq -r '.params.options // [] | join(" ")')
+skip_download=$(echo "$payload" | jq -r '.params.skip_download // false')
 
 export_aws_vars
 
-echo "Downloading from S3..."
-eval aws s3 sync "s3://$bucket/$prefix" $dest $options
-echo "Done."
+if [ "$skip_download" = "true" ]; then
+  echo "Skipping download from S3"
+else
+  echo "Downloading from S3..."
+  eval aws s3 sync "s3://$bucket/$prefix" $dest $options
+  echo "Done."
+fi
 
 emit_version
