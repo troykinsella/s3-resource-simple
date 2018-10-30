@@ -16,7 +16,7 @@ source "$(dirname $0)/common.sh"
 
 payload=`cat`
 bucket=$(get_bucket)
-prefix=$(echo "$payload" | jq -r '.params.prefix // ""')
+prefix=$(get_prefix)
 options=$(echo "$payload" | jq -r '.params.options // [] | join(" ")')
 skip_download=$(echo "$payload" | jq -r '.params.skip_download // false')
 

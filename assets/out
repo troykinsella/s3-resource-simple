@@ -16,7 +16,7 @@ source "$(dirname $0)/common.sh"
 
 payload=`cat`
 bucket=$(get_bucket)
-prefix=$(echo "$payload" | jq -r '.params.prefix // ""')
+prefix=$(get_prefix)
 options=$(echo "$payload" | jq -r '.params.options // [] | join(" ")')
 source_dir=$(echo "$payload" | jq -r '.params.source_dir // "."')
 test -z "$source_dir" && { echo "Must supply params.source_dir" >&2; exit 1; }

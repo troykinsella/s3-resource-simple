@@ -5,6 +5,14 @@ get_bucket() {
   echo $bucket
 }
 
+get_prefix() {
+  local prefix=$(echo "$payload" | jq -r '.params.prefix // ""')
+  if [ -n "$prefix" ]; then
+    prefix=$(eval $prefix) # Resolve variables like $BUILD_NAME, etc.
+  fi
+  echo $prefix
+}
+
 export_aws_vars() {
   local access_key_id=$(echo "$payload" | jq -r '.source.access_key_id // empty')
   local secret_access_key=$(echo "$payload" | jq -r '.source.secret_access_key // empty')
