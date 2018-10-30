@@ -8,7 +8,7 @@ get_bucket() {
 get_prefix() {
   local prefix=$(echo "$payload" | jq -r '.params.prefix // ""')
   if [ -n "$prefix" ]; then
-    prefix=$(eval $prefix) # Resolve variables like $BUILD_NAME, etc.
+    prefix=$(eval echo $prefix) # Resolve variables like $BUILD_NAME, etc.
   fi
   echo $prefix
 }
