@@ -24,8 +24,10 @@ test -z "$source_dir" && { echo "Must supply params.source_dir" >&2; exit 1; }
 export_aws_vars
 
 cd $source/$source_dir
-echo "Uploading to S3 from '$source_dir'..."
-eval aws s3 sync $source/$source_dir "s3://$bucket/$prefix" $options
+
+bucket_uri="s3://$bucket/$prefix"
+echo "Uploading '$source_dir' to '$bucket_uri'..."
+eval aws s3 sync $source/$source_dir $bucket_uri $options
 echo "Done."
 
 emit_version
