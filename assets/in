@@ -17,6 +17,7 @@ source "$(dirname $0)/common.sh"
 payload=`cat`
 bucket=$(get_bucket)
 prefix=$(get_prefix)
+aws_options=$(echo "$payload" | jq -r '.source.aws_options // [] | join(" ")')
 options=$(echo "$payload" | jq -r '.params.options // [] | join(" ")')
 skip_download=$(echo "$payload" | jq -r '.params.skip_download // false')
 
@@ -26,7 +27,7 @@ if [ "$skip_download" = "true" ]; then
   echo "Skipping download from S3"
 else
   echo "Downloading from S3..."
-  eval aws s3 sync "s3://$bucket/$prefix" $dest $options
+  eval aws $aws_options s3 sync "s3://$bucket/$prefix" $dest $options
   echo "Done."
 fi
 

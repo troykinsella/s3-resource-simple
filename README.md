@@ -21,6 +21,7 @@ resources:
     secret_access_key: ((aws_secret_key)) # Optional
     bucket: my-bucket
     region: us-east-1 # Optional
+    aws_options: "--endpoint-url https://objects-us-east-1.dream.io" # Optional
 
 jobs:
 - name: publish-files
@@ -50,8 +51,8 @@ Given the following directory `test`:
 ```
 test
 ├── results
-│   ├── 1.json
-│   └── 2.json
+│   ├── 1.json
+│   └── 2.json
 └── scripts
     └── bad.sh
 ```
@@ -63,6 +64,9 @@ options:
 - "--exclude '*'"
 - "--include 'results/*'"
 ```
+
+The `aws_options` source parameter supplies options to the `aws` executable 
+(whereas the `options` parameter supplies options to the `aws sync` command.)
 
 ### Region
 Interacting with some AWS regions (like London) requires AWS Signature Version
